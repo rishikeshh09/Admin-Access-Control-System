@@ -39,12 +39,6 @@ For development with auto-restart:
 npm run dev
 ```
 
-4. Access the application:
-- Main site: http://localhost:3000
-- Login page: http://localhost:3000/login.html
-- Registration page: http://localhost:3000/register.html
-- Admin dashboard: http://localhost:3000/admin.html (requires admin login)
-
 ## Default Admin Account
 
 - Email: admin@example.com
@@ -76,7 +70,3 @@ npm run dev
 - Input validation
 - Authentication middleware
 - Admin access control
-
-## License
-
-This project is for educational purposes only. 
