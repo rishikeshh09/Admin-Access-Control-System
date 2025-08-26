@@ -2,6 +2,21 @@
 
 This project is an Amazon clone with user authentication and an admin dashboard using SQLite for data storage.
 
+## Technologies Used
+- Backend: Node.js, Express.js<br>
+- Database: SQLite with sqlite3 driver<br>
+- Authentication: bcrypt, express-session<br>
+- Frontend: HTML5, CSS3, JavaScript (ES6+)<br>
+- UI Components: Custom CSS, Font Awesome for icons<br>
+- API Architecture: RESTful API endpoints<br>
+
+## Authentication Flow
+- Users register with email/password <br>
+- Passwords are securely hashed with bcrypt<br>
+- Login creates a session stored in SQLite<br>
+- Navigation dynamically changes based on login status<br>
+- Admin users get additional access<br>
+
 ## Features
 
 - User registration and login
