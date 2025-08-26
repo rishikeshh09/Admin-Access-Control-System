@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone - Your One-Stop Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        #adminBtn {
+            background-color: #232f3e;
+            color: #f3a847 !important;
+            border: 1px solid #f3a847;
+        }
+        #adminBtn:hover {
+            background-color: #f3a847;
+            color: #232f3e !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="images/amazon_logo.png" alt="Amazon Logo">
+            </div>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/products">Products</a>
+                <a href="/cart"><i class="fas fa-shopping-cart"></i> Cart</a>
+                <!-- Auth links that will be dynamically shown/hidden -->
+                <div id="auth-links-guest" style="display: inline-block;">
+                    <a href="/login">Sign In</a>
+                    <a href="/register">Register</a>
+                </div>
+                <div id="auth-links-user" style="display: none;">
+                    <a href="/profile"><i class="fas fa-user-circle"></i> Profile</a>
+                    <a href="#" id="logoutBtn">Logout</a>
+                    <a href="/admin" id="adminBtn" style="display: none;"><i class="fas fa-lock"></i> Admin</a>
+                </div>
+            </nav>
+    </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Amazon Clone</h1>
+            <p>Discover amazing deals on millions of products</p>
+            <a href="/products" class="add-to-cart">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="section-title">
+            <h2>Featured Products</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="images/box1-image.jpg" alt="Mobile Phones" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Mobile Phones</h3>
+                    <p class="product-price">From $299.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box2-image.jpg" alt="Kitchen Items" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Kitchen Items</h3>
+                    <p class="product-price">From $19.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box3-image.jpg" alt="Smartwatches" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Smartwatches</h3>
+                    <p class="product-price">From $149.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box4-image.jpg" alt="Shoes and Daily Wears" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Shoes and Daily Wears</h3>
+                    <p class="product-price">From $39.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box5-image.jpg" alt="Tech Gadgets" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Tech Gadgets</h3>
+                    <p class="product-price">From $49.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box6-image.jpg" alt="Groceries" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Groceries</h3>
+                    <p class="product-price">From $9.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box7-image.jpg" alt="Book Finds" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Book Finds</h3>
+                    <p class="product-price">From $14.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box8-image.jpg" alt="Pants for men" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Pants for men</h3>
+                    <p class="product-price">From $29.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+            </div>
+        </div>
+            <div class="product-card">
+                <img src="images/box9-image.jpg" alt="Carry Bags" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Carry Bags</h3>
+                    <p class="product-price">From $24.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+        </div>
+            <div class="product-card">
+                <img src="images/box10-image.jpg" alt="Smart phones" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Smart phones</h3>
+                    <p class="product-price">From $399.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+    </div>
+            <div class="product-card">
+                <img src="images/box11-image.jpg" alt="Coffee maker" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Coffee maker</h3>
+                    <p class="product-price">From $79.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+    </div>
+            <div class="product-card">
+                <img src="images/box12-image.jpg" alt="Bedsheets" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Bedsheets</h3>
+                    <p class="product-price">From $34.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box13-image.jpg" alt="Trimmers" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Trimmers</h3>
+                    <p class="product-price">From $19.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box14-image.jpg" alt="Stylish wears" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Stylish wears</h3>
+                    <p class="product-price">From $49.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box15-image.jpg" alt="Cargo for men" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Cargo for men</h3>
+                    <p class="product-price">From $39.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box16-image.jpg" alt="College bags" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">College bags</h3>
+                    <p class="product-price">From $44.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box17-image.jpg" alt="Makeup gear" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Makeup gear</h3>
+                    <p class="product-price">From $29.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box18-image.jpg" alt="Caps for men" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Caps for men</h3>
+                    <p class="product-price">From $19.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box19-image.jpg" alt="Analog watches" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Analog watches</h3>
+                    <p class="product-price">From $89.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+            </div>
+            <div class="product-card">
+                <img src="images/box20-image.jpg" alt="Luxury clothing" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Luxury clothing</h3>
+                    <p class="product-price">From $199.99</p>
+                    <button class="add-to-cart">Shop Now</button>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-title">
+                <h2>About This Project</h2>
+        </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Project Overview</h3>
+                    <p>This Amazon Clone is a full-stack web application built with Node.js, Express, and SQLite. It demonstrates modern web development practices and provides a seamless shopping experience.</p>
+        </div>
+                <div class="about-card">
+                    <h3>Key Features</h3>
+                    <ul class="features-list">
+                        <li>User Authentication & Authorization</li>
+                        <li>Product Management System</li>
+                        <li>Shopping Cart Functionality</li>
+                        <li>Admin Dashboard</li>
+                        <li>Responsive Design</li>
+                        <li>Secure Payment Integration</li>
+                    </ul>
+            </div>
+                <div class="about-card">
+                    <h3>Technologies Used</h3>
+                    <ul class="features-list">
+                        <li>Node.js & Express.js</li>
+                        <li>SQLite Database</li>
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>Bootstrap & Font Awesome</li>
+                        <li>RESTful API Architecture</li>
+                    </ul>
+        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Amazon Clone. All rights reserved.</p>
+            <p>This is a demo project created for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Check authentication status when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            
+            // Logout button functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            }
+        });
+        
+        // Function to check if user is logged in
+        function checkAuthStatus() {
+            fetch('/api/auth/status')
+                .then(response => response.json())
+                .then(data => {
+                    updateNavigation(data.isLoggedIn);
+                })
+                .catch(error => {
+                    console.error('Error checking auth status:', error);
+                });
+        }
+        
+        // Update navigation based on login status
+        function updateNavigation(isLoggedIn) {
+            const guestLinks = document.getElementById('auth-links-guest');
+            const userLinks = document.getElementById('auth-links-user');
+            
+            if (isLoggedIn) {
+                guestLinks.style.display = 'none';
+                userLinks.style.display = 'inline-block';
+                
+                // Check if user is admin to show admin button
+                fetch('/api/auth/status')
+                    .then(response => response.json())
+                    .then(data => {
+                        const adminBtn = document.getElementById('adminBtn');
+                        if (data.isAdmin) {
+                            adminBtn.style.display = 'inline-block';
+                        } else {
+                            adminBtn.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error checking admin status:', error);
+                    });
+            } else {
+                guestLinks.style.display = 'inline-block';
+                userLinks.style.display = 'none';
+            }
+        }
+        
+        // Function to handle logout
+        function logout() {
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update navigation after successful logout
+                    updateNavigation(false);
+                    // Optional: redirect to home or login page
+                    window.location.reload();
+                } else {
+                    alert('Logout failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+                alert('Error logging out. Please try again later.');
+            });
+        }
+    </script>
+</body>
+</html>

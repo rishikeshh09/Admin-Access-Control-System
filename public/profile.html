@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone - User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/auth.css">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #f0c14b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 32px;
+            color: #131921;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-info h1 {
+            margin: 0 0 10px;
+            color: #131921;
+        }
+        .profile-card {
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .profile-card h2 {
+            margin-top: 0;
+            color: #131921;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .data-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .data-label {
+            width: 150px;
+            font-weight: bold;
+            color: #565959;
+        }
+        .data-value {
+            flex: 1;
+        }
+        .edit-button {
+            background-color: #f0c14b;
+            border: 1px solid #a88734;
+            border-radius: 3px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .edit-button:hover {
+            background-color: #ddb347;
+        }
+        .action-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .primary-button {
+            background-color: #f0c14b;
+            border: 1px solid #a88734;
+            border-radius: 3px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            color: #111;
+            display: inline-block;
+        }
+        .secondary-button {
+            background-color: #e7e9ec;
+            border: 1px solid #adb1b8;
+            border-radius: 3px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            color: #111;
+            display: inline-block;
+        }
+        .primary-button:hover {
+            background-color: #ddb347;
+        }
+        .secondary-button:hover {
+            background-color: #d8d8d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" style="max-width: 900px;">
+        <div class="logo-container">
+            <a href="/">
+                <img src="images/amazon_logo.png" alt="Amazon Logo" class="auth-logo">
+            </a>
+        </div>
+        
+        <div id="profileContent" class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar" id="avatarInitial">
+                    <!-- Initial will be inserted here -->
+                </div>
+                <div class="profile-info">
+                    <h1 id="userName">Loading...</h1>
+                    <p>Member since <span id="memberSince">Loading...</span></p>
+                </div>
+            </div>
+            
+            <div class="profile-card">
+                <h2>Account Information</h2>
+                <div class="data-row">
+                    <div class="data-label">Name:</div>
+                    <div class="data-value" id="profileName">Loading...</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Email:</div>
+                    <div class="data-value" id="profileEmail">Loading...</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Last Login:</div>
+                    <div class="data-value" id="lastLogin">Loading...</div>
+                </div>
+                <div class="data-row">
+                    <div class="data-label">Login Count:</div>
+                    <div class="data-value" id="loginCount">Loading...</div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="/" class="primary-button">Back to Home</a>
+                <button id="logoutButton" class="secondary-button">Logout</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">Conditions of Use</a>
+                <a href="#">Privacy Notice</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="copyright">
+                © 2024, Amazon.com, Inc. or its affiliates
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            fetch('/api/auth/status')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.isLoggedIn) {
+                        // Redirect to login if not logged in
+                        window.location.href = '/login';
+                        return;
+                    }
+                    
+                    // Load user profile data
+                    loadUserProfile();
+                })
+                .catch(error => {
+                    console.error('Error checking auth status:', error);
+                    alert('Error loading profile. Please try again later.');
+                });
+            
+            // Logout button functionality
+            document.getElementById('logoutButton').addEventListener('click', function() {
+                fetch('/api/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/login';
+                    } else {
+                        alert('Logout failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error logging out:', error);
+                    alert('Error logging out. Please try again later.');
+                });
+            });
+        });
+        
+        function loadUserProfile() {
+            fetch('/api/user/profile')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const user = data.user;
+                        
+                        // Set user data in profile
+                        document.getElementById('userName').textContent = user.name;
+                        document.getElementById('profileName').textContent = user.name;
+                        document.getElementById('profileEmail').textContent = user.email;
+                        
+                        // Set avatar initial
+                        const initial = user.name.charAt(0).toUpperCase();
+                        document.getElementById('avatarInitial').textContent = initial;
+                        
+                        // Format dates
+                        const createdDate = new Date(user.created_at);
+                        document.getElementById('memberSince').textContent = createdDate.toLocaleDateString();
+                        
+                        if (user.last_login) {
+                            const lastLoginDate = new Date(user.last_login);
+                            document.getElementById('lastLogin').textContent = lastLoginDate.toLocaleString();
+                        } else {
+                            document.getElementById('lastLogin').textContent = 'N/A';
+                        }
+                        
+                        document.getElementById('loginCount').textContent = user.login_count;
+                    } else {
+                        alert('Failed to load profile data. Please try again later.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading profile:', error);
+                    alert('Error loading profile data. Please try again later.');
+                });
+        }
+    </script>
+</body>
+</html> 

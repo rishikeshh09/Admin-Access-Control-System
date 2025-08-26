@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <div class="logo-container">
+                <img src="images/amazon_logo.png" alt="Amazon Logo" class="admin-logo">
+                <span class="admin-title">Admin Dashboard</span>
+            </div>
+            <div class="admin-nav">
+                <span class="admin-welcome" id="adminWelcome">Welcome, Admin</span>
+                <a href="/" class="home-btn"><i class="fas fa-home"></i> Home</a>
+                <a href="#" id="logoutBtn" class="logout-btn">Logout</a>
+            </div>
+        </header>
+        
+        <div class="admin-content">
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="active"><a href="#"><i class="fas fa-users"></i> User Management</a></li>
+                    <li><a href="#"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+            
+            <div class="main-content">
+                <div class="page-header">
+                    <h1>User Management</h1>
+                    <div class="actions">
+                        <div class="search-box">
+                            <input type="text" id="userSearch" placeholder="Search users...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                        <button class="refresh-btn" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalUsers">0</div>
+                        <div class="stat-label">Total Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="activeToday">0</div>
+                        <div class="stat-label">Active Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="newUsers">0</div>
+                        <div class="stat-label">New This Week</div>
+                    </div>
+                </div>
+                
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Registration Date</th>
+                                <th>Last Login</th>
+                                <th>Login Count</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <!-- User data will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button id="prevPage" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                    <span id="pageInfo">Page 1 of 1</span>
+                    <button id="nextPage" disabled>Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Details Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>User Details</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body" id="userDetails">
+                <!-- User details will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/admin.js"></script>
+    <script>
+        // Check if user is logged in and is an admin
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAdminStatus();
+            
+            // Logout button functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            }
+        });
+        
+        function checkAdminStatus() {
+            fetch('/api/auth/status')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.isLoggedIn) {
+                        // Redirect to login if not logged in
+                        window.location.href = '/login';
+                        return;
+                    }
+                    
+                    if (!data.isAdmin) {
+                        // Redirect to home if not an admin
+                        alert('Access denied. Admin privileges required.');
+                        window.location.href = '/';
+                        return;
+                    }
+                    
+                    // Load admin name if available
+                    fetch('/api/user/profile')
+                        .then(response => response.json())
+                        .then(userData => {
+                            if (userData.success && userData.user) {
+                                document.getElementById('adminWelcome').textContent = 'Welcome, ' + userData.user.name;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error getting user profile:', error);
+                        });
+                })
+                .catch(error => {
+                    console.error('Error checking auth status:', error);
+                    alert('Error verifying admin access. Please try again later.');
+                    window.location.href = '/login';
+                });
+        }
+        
+        function logout() {
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/login';
+                } else {
+                    alert('Logout failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error logging out:', error);
+                alert('Error logging out. Please try again later.');
+            });
+        }
+    </script>
+</body>
+</html> 

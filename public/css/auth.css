@@ -1,0 +1,228 @@
+/* Amazon Authentication Pages Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #fff;
+    color: #111;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 350px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.auth-logo {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.form-container {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.07) inset;
+    outline: none;
+    font-size: 14px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #e77600;
+    box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+}
+
+.forgot-password {
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.forgot-password a {
+    color: #0066c0;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    color: #c45500;
+    text-decoration: underline;
+}
+
+.password-hint {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #555;
+}
+
+.signin-btn {
+    width: 100%;
+    padding: 8px 10px;
+    background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+    border: 1px solid #a88734;
+    border-radius: 3px;
+    color: #111;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+}
+
+.signin-btn:hover {
+    background: linear-gradient(to bottom, #f5d78e, #eeb933);
+}
+
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 20px 0;
+    height: 1px;
+    background-color: #e7e7e7;
+}
+
+.divider span {
+    position: relative;
+    top: -0.5em;
+    background-color: #fff;
+    padding: 0 8px;
+    font-size: 12px;
+    color: #767676;
+}
+
+.create-account-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+    border: 1px solid #adb1b8;
+    border-radius: 3px;
+    color: #111;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+}
+
+.create-account-btn:hover {
+    background: linear-gradient(to bottom, #e7eaf0, #d9dce1);
+}
+
+.terms {
+    margin: 20px 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.terms a {
+    color: #0066c0;
+    text-decoration: none;
+}
+
+.terms a:hover {
+    color: #c45500;
+    text-decoration: underline;
+}
+
+.login-link {
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.login-link a {
+    color: #0066c0;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    color: #c45500;
+    text-decoration: underline;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e7e7e7;
+}
+
+.footer-links {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #0066c0;
+    font-size: 12px;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    color: #c45500;
+    text-decoration: underline;
+}
+
+.copyright {
+    font-size: 11px;
+    color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 10px;
+    }
+    
+    .form-container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        max-width: 100%;
+    }
+} 
