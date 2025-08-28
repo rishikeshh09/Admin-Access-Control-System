@@ -1,4 +1,4 @@
-# Amazon Clone with SQLite Authentication
+# Admin Access Control System
 
 This project is an Amazon clone with user authentication and an admin dashboard using SQLite for data storage.
 
